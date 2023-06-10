@@ -89,7 +89,7 @@ func (s *TokenService) Name() string {
 }
 
 func InitCSRFTokenSrv(conn db.Connection) (string, service.Service) {
-	list, err := db.WithDriver(conn).Table("public.admin_session").
+	list, err := db.WithDriver(conn).Table("admin_session").
 		Where("values", "=", "__csrf_token__").
 		All()
 	if db.CheckError(err, db.QUERY) {
@@ -123,7 +123,7 @@ func (s *TokenService) AddToken() string {
 	defer s.lock.Unlock()
 	tokenStr := modules.Uuid()
 	s.tokens = append(s.tokens, tokenStr)
-	_, err := db.WithDriver(s.conn).Table("public.admin_session").Insert(dialect.H{
+	_, err := db.WithDriver(s.conn).Table("admin_session").Insert(dialect.H{
 		"sid":    tokenStr,
 		"values": "__csrf_token__",
 	})
@@ -139,7 +139,7 @@ func (s *TokenService) CheckToken(toCheckToken string) bool {
 	for i := 0; i < len(s.tokens); i++ {
 		if (s.tokens)[i] == toCheckToken {
 			s.tokens = append((s.tokens)[:i], (s.tokens)[i+1:]...)
-			err := db.WithDriver(s.conn).Table("public.admin_session").
+			err := db.WithDriver(s.conn).Table("admin_session").
 				Where("sid", "=", toCheckToken).
 				Where("values", "=", "__csrf_token__").
 				Delete()

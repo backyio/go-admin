@@ -39,7 +39,7 @@ func Cleaner(config config.DatabaseList) {
 	var allTables = [...]string{
 		"admin_users",
 		"admin_user_permissions",
-		"public.admin_session",
+		"admin_session",
 		"admin_roles",
 		"admin_role_users",
 		"admin_role_permissions",

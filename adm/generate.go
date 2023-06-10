@@ -26,7 +26,7 @@ var systemGoAdminTables = []string{
 	"admin_role_menu",
 	"admin_site",
 	"admin_roles",
-	"public.admin_session",
+	"admin_session",
 	"admin_users",
 	"admin_role_permissions",
 	"admin_role_users",
