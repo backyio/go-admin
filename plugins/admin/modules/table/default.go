@@ -463,18 +463,10 @@ func (tb *DefaultTable) getDataFromDatabase(params parameter.Parameters) (PanelI
 		// %s means: table, join table, pk values
 		countStatement = "select count(*) " + countExtra + " from " + placeholder + " %s where " + pk + " in (%s)"
 	} else {
-		if connection.Name() == db.DriverMssql {
-			// %s means: order by field, order by type, fields, table, join table, wheres, group by
-			queryStatement = "SELECT * FROM (SELECT ROW_NUMBER() OVER (ORDER BY %s." + placeholder + " %s) as ROWNUMBER_, %s from " +
-				placeholder + "%s %s %s ) as TMP_ WHERE TMP_.ROWNUMBER_ > ? AND TMP_.ROWNUMBER_ <= ?"
-			// %s means: table, join table, wheres
-			countStatement = "select count(*) as [size] from (select count(*) as [size] from " + placeholder + " %s %s %s) src"
-		} else {
-			// %s means: fields, table, join table, wheres, group by, order by field, order by type
-			queryStatement = "select %s from " + placeholder + "%s %s %s order by " + placeholder + "." + placeholder + " %s LIMIT ? OFFSET ?"
-			// %s means: table, join table, wheres
-			countStatement = "select count(*) from (select " + pk + " from " + placeholder + " %s %s %s) src"
-		}
+		// %s means: fields, table, join table, wheres, group by, order by field, order by type
+		queryStatement = "select %s from " + placeholder + "%s %s %s order by " + placeholder + "." + placeholder + " %s LIMIT ? OFFSET ?"
+		// %s means: table, join table, wheres
+		countStatement = "select count(*) from (select " + pk + " from " + placeholder + " %s %s %s) src"
 	}
 
 	columns, _ := tb.getColumns(tb.Info.Table)
@@ -484,7 +476,6 @@ func (tb *DefaultTable) getDataFromDatabase(params parameter.Parameters) (PanelI
 	fields += pk
 
 	allFields := fields
-	groupFields := fields
 
 	if joinFields != "" {
 		allFields += "," + joinFields[:len(joinFields)-1]
