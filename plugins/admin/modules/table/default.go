@@ -267,9 +267,9 @@ func (tb *DefaultTable) GetDataWithIds(params parameter.Parameters) (PanelInfo, 
 func (tb *DefaultTable) getTempModelData(res map[string]interface{}, params parameter.Parameters, columns Columns) map[string]types.InfoItem {
 
 	var tempModelData = map[string]types.InfoItem{
-		"__goadmin_edit_params":   {},
-		"__goadmin_delete_params": {},
-		"__goadmin_detail_params": {},
+		"__admin_edit_params":   {},
+		"__admin_delete_params": {},
+		"__admin_detail_params": {},
 	}
 	headField := ""
 	editParams := ""
@@ -343,13 +343,13 @@ func (tb *DefaultTable) getTempModelData(res map[string]interface{}, params para
 	}
 
 	if editParams != "" {
-		tempModelData["__goadmin_edit_params"] = types.InfoItem{Content: template.HTML("&" + editParams[:len(editParams)-1])}
+		tempModelData["__admin_edit_params"] = types.InfoItem{Content: template.HTML("&" + editParams[:len(editParams)-1])}
 	}
 	if deleteParams != "" {
-		tempModelData["__goadmin_delete_params"] = types.InfoItem{Content: template.HTML("&" + deleteParams[:len(deleteParams)-1])}
+		tempModelData["__admin_delete_params"] = types.InfoItem{Content: template.HTML("&" + deleteParams[:len(deleteParams)-1])}
 	}
 	if detailParams != "" {
-		tempModelData["__goadmin_detail_params"] = types.InfoItem{Content: template.HTML("&" + detailParams[:len(detailParams)-1])}
+		tempModelData["__admin_detail_params"] = types.InfoItem{Content: template.HTML("&" + detailParams[:len(detailParams)-1])}
 	}
 
 	primaryKeyField := tb.Info.FieldList.GetFieldByFieldName(tb.PrimaryKey.Name)
@@ -458,9 +458,6 @@ func (tb *DefaultTable) getDataFromDatabase(params parameter.Parameters) (PanelI
 
 	if len(ids) > 0 {
 		countExtra := ""
-		if connection.Name() == db.DriverMssql {
-			countExtra = "as [size]"
-		}
 		// %s means: fields, table, join table, pk values, group by, order by field,  order by type
 		queryStatement = "select %s from " + placeholder + " %s where " + pk + " in (%s) %s ORDER BY %s." + placeholder + " %s"
 		// %s means: table, join table, pk values
@@ -491,16 +488,6 @@ func (tb *DefaultTable) getDataFromDatabase(params parameter.Parameters) (PanelI
 
 	if joinFields != "" {
 		allFields += "," + joinFields[:len(joinFields)-1]
-		if connection.Name() == db.DriverMssql {
-			for _, field := range tb.Info.FieldList {
-				if field.TypeName == db.Text || field.TypeName == db.Longtext {
-					f := modules.Delimiter(connection.GetDelimiter(), connection.GetDelimiter2(), field.Field)
-					headField := table + "." + f
-					allFields = strings.ReplaceAll(allFields, headField, "CAST("+headField+" AS NVARCHAR(MAX)) as "+f)
-					groupFields = strings.ReplaceAll(groupFields, headField, "CAST("+headField+" AS NVARCHAR(MAX))")
-				}
-			}
-		}
 	}
 
 	if !modules.InArray(columns, params.SortField) {
@@ -535,30 +522,15 @@ func (tb *DefaultTable) getDataFromDatabase(params parameter.Parameters) (PanelI
 			wheres = " where " + wheres
 		}
 
-		if connection.Name() == db.DriverMssql {
-			args = append(whereArgs, (params.PageInt-1)*params.PageSizeInt, params.PageInt*params.PageSizeInt)
-		} else {
-			args = append(whereArgs, params.PageSizeInt, (params.PageInt-1)*params.PageSizeInt)
-		}
+		args = append(whereArgs, params.PageSizeInt, (params.PageInt-1)*params.PageSizeInt)
 	}
 
 	groupBy := ""
 	if len(joinTables) > 0 {
-		if connection.Name() == db.DriverMssql {
-			groupBy = " GROUP BY " + groupFields
-		} else {
-			groupBy = " GROUP BY " + pk
-		}
+		groupBy = " GROUP BY " + pk
 	}
 
-	queryCmd := ""
-	if connection.Name() == db.DriverMssql && len(ids) == 0 {
-		queryCmd = fmt.Sprintf(queryStatement, tb.Info.Table, params.SortField, params.SortType,
-			allFields, tb.Info.Table, joins, wheres, groupBy)
-	} else {
-		queryCmd = fmt.Sprintf(queryStatement, allFields, tb.Info.Table, joins, wheres, groupBy,
-			tb.Info.Table, params.SortField, params.SortType)
-	}
+	queryCmd := fmt.Sprintf(queryStatement, allFields, tb.Info.Table, joins, wheres, groupBy, tb.Info.Table, params.SortField, params.SortType)
 
 	logger.LogSQL(queryCmd, args)
 
@@ -596,8 +568,6 @@ func (tb *DefaultTable) getDataFromDatabase(params parameter.Parameters) (PanelI
 			} else {
 				size = int(total[0]["count"].(int64))
 			}
-		} else if tb.connectionDriver == db.DriverMssql {
-			size = int(total[0]["size"].(int64))
 		} else {
 			size = int(total[0]["count(*)"].(int64))
 		}
@@ -685,28 +655,13 @@ func (tb *DefaultTable) GetDataWithId(param parameter.Parameters) (FormInfo, err
 		}
 
 		fields += pk
-		groupFields := fields
 
 		if joinFields != "" {
 			fields += "," + joinFields[:len(joinFields)-1]
-			if connection.Name() == db.DriverMssql {
-				for i := 0; i < len(tb.Form.FieldList); i++ {
-					if tb.Form.FieldList[i].TypeName == db.Text || tb.Form.FieldList[i].TypeName == db.Longtext {
-						f := modules.Delimiter(connection.GetDelimiter(), connection.GetDelimiter2(), tb.Form.FieldList[i].Field)
-						headField := tb.Info.Table + "." + f
-						fields = strings.ReplaceAll(fields, headField, "CAST("+headField+" AS NVARCHAR(MAX)) as "+f)
-						groupFields = strings.ReplaceAll(groupFields, headField, "CAST("+headField+" AS NVARCHAR(MAX))")
-					}
-				}
-			}
 		}
 
 		if len(joinTables) > 0 {
-			if connection.Name() == db.DriverMssql {
-				groupBy = " GROUP BY " + groupFields
-			} else {
-				groupBy = " GROUP BY " + pk
-			}
+			groupBy = " GROUP BY " + pk
 		}
 
 		queryCmd := fmt.Sprintf(queryStatement, fields, tableName, joins, groupBy)
@@ -1165,20 +1120,6 @@ func (tb *DefaultTable) getColumns(table string) (Columns, bool) {
 			}
 		}
 		return columns, auto
-	case db.DriverSqlite:
-		for key, model := range columnsModel {
-			columns[key] = string(model["name"].(string))
-		}
-
-		num, _ := tb.sql().Table("sqlite_sequence").
-			Where("name", "=", tb.GetForm().Table).Count()
-
-		return columns, num > 0
-	case db.DriverMssql:
-		for key, model := range columnsModel {
-			columns[key] = string(model["column_name"].(string))
-		}
-		return columns, true
 	default:
 		panic("wrong driver")
 	}

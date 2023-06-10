@@ -1702,15 +1702,15 @@ var TemplateList = map[string]string{"403": `<div class="missing-content">
                         <td style="text-align: center;">
                             {{if not $ActionFold}}
                                 {{if $EditUrl}}
-                                    <a href='{{$EditUrl}}&__goadmin_edit_pk={{(index $info $PrimaryKey).Content}}&{{(index $info "__goadmin_edit_params").Content}}'><i
+                                    <a href='{{$EditUrl}}&__goadmin_edit_pk={{(index $info $PrimaryKey).Content}}&{{(index $info "__admin_edit_params").Content}}'><i
                                                 class="fa fa-edit" style="font-size: 16px;"></i></a>
                                 {{end}}
                                 {{if $DeleteUrl}}
-                                    <a href="javascript:void(0);" data-id='{{(index $info $PrimaryKey).Content}}' data-param='{{(index $info "__goadmin_delete_params").Content}}'
+                                    <a href="javascript:void(0);" data-id='{{(index $info $PrimaryKey).Content}}' data-param='{{(index $info "__admin_delete_params").Content}}'
                                        class="grid-row-delete"><i class="fa fa-trash" style="font-size: 16px;"></i></a>
                                 {{end}}
                                 {{if $DetailUrl}}
-                                    <a href='{{$DetailUrl}}&__goadmin_detail_pk={{(index $info $PrimaryKey).Content}}&{{(index $info "__goadmin_detail_params").Content}}'
+                                    <a href='{{$DetailUrl}}&__goadmin_detail_pk={{(index $info $PrimaryKey).Content}}&{{(index $info "__admin_detail_params").Content}}'
                                        class="grid-row-view">
                                         <i class="fa fa-eye" style="font-size: 16px;"></i>
                                     </a>
