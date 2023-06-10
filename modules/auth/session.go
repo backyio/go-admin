@@ -18,13 +18,13 @@ import (
 	"github.com/backyio/go-admin/plugins/admin/modules"
 )
 
-const DefaultCookieKey = "go_admin_session"
+const DefaultCookieKey = "public.admin_session"
 
 // NewDBDriver return the default PersistenceDriver.
 func newDBDriver(conn db.Connection) *DBDriver {
 	return &DBDriver{
 		conn:      conn,
-		tableName: "admin_session",
+		tableName: "public.admin_session",
 	}
 }
 
