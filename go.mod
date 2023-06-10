@@ -13,9 +13,9 @@ require (
 	github.com/gobuffalo/buffalo v1.1.0
 	github.com/gobuffalo/packr/v2 v2.8.3
 	github.com/google/uuid v1.3.0
+	github.com/jackc/pgx/v5 v5.3.1
 	github.com/jawher/mow.cli v1.2.0
 	github.com/jteeuwen/go-bindata v3.0.7+incompatible
-	github.com/lib/pq v1.10.9
 	github.com/magiconair/properties v1.8.7
 	github.com/mattn/go-sqlite3 v1.14.17
 	github.com/mgutz/ansi v0.0.0-20200706080929-d51e80ef957d
@@ -79,6 +79,8 @@ require (
 	github.com/gorilla/websocket v0.0.0-20170926233335-4201258b820c // indirect
 	github.com/imkira/go-interpol v1.1.0 // indirect
 	github.com/inconshreveable/mousetrap v1.0.1 // indirect
+	github.com/jackc/pgpassfile v1.0.0 // indirect
+	github.com/jackc/pgservicefile v0.0.0-20221227161230-091c0ba34f0a // indirect
 	github.com/joho/godotenv v1.4.0 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
 	github.com/karrick/godirwalk v1.16.1 // indirect
