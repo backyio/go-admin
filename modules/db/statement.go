@@ -241,8 +241,6 @@ func (sql *SQL) Count() (int64, error) {
 
 	if driver == DriverPostgresql {
 		return res["count"].(int64), nil
-	} else if driver == DriverMssql {
-		return res[""].(int64), nil
 	}
 
 	return res["count(*)"].(int64), nil
@@ -465,20 +463,13 @@ func (sql *SQL) ShowTables() ([]string, error) {
 	}
 
 	key := "Tables_in_" + sql.TableName
-	if sql.diver.Name() == DriverPostgresql || sql.diver.Name() == DriverSqlite {
+	if sql.diver.Name() == DriverPostgresql {
 		key = "tablename"
-	} else if sql.diver.Name() == DriverMssql {
-		key = "TABLE_NAME"
 	} else if _, ok := models[0][key].(string); !ok {
 		key = "Tables_in_" + strings.ToLower(sql.TableName)
 	}
 
 	for i := 0; i < len(models); i++ {
-		// skip sqlite system tables
-		if sql.diver.Name() == DriverSqlite && models[i][key].(string) == "sqlite_sequence" {
-			continue
-		}
-
 		tables = append(tables, models[i][key].(string))
 	}
 
