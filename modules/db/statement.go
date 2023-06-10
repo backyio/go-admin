@@ -12,8 +12,8 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/GoAdminGroup/go-admin/modules/db/dialect"
-	"github.com/GoAdminGroup/go-admin/modules/logger"
+	"github.com/backyio/go-admin/modules/db/dialect"
+	"github.com/backyio/go-admin/modules/logger"
 )
 
 // SQL wraps the Connection and driver dialect methods.
@@ -544,7 +544,7 @@ func (sql *SQL) Exec() (int64, error) {
 	return res.LastInsertId()
 }
 
-const postgresInsertCheckTableName = "goadmin_menu|goadmin_permissions|goadmin_roles|goadmin_users"
+const postgresInsertCheckTableName = "admin_menu|admin_permissions|admin_roles|admin_users"
 
 // Insert exec the insert method of given key/value pairs.
 func (sql *SQL) Insert(values dialect.H) (int64, error) {

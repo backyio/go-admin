@@ -3,17 +3,17 @@ package datamodel
 import (
 	"fmt"
 
-	"github.com/GoAdminGroup/go-admin/context"
-	"github.com/GoAdminGroup/go-admin/modules/db"
-	form2 "github.com/GoAdminGroup/go-admin/plugins/admin/modules/form"
-	"github.com/GoAdminGroup/go-admin/plugins/admin/modules/table"
-	"github.com/GoAdminGroup/go-admin/template"
-	"github.com/GoAdminGroup/go-admin/template/icon"
-	"github.com/GoAdminGroup/go-admin/template/types"
-	"github.com/GoAdminGroup/go-admin/template/types/action"
-	"github.com/GoAdminGroup/go-admin/template/types/form"
-	selection "github.com/GoAdminGroup/go-admin/template/types/form/select"
-	editType "github.com/GoAdminGroup/go-admin/template/types/table"
+	"github.com/backyio/go-admin/context"
+	"github.com/backyio/go-admin/modules/db"
+	form2 "github.com/backyio/go-admin/plugins/admin/modules/form"
+	"github.com/backyio/go-admin/plugins/admin/modules/table"
+	"github.com/backyio/go-admin/template"
+	"github.com/backyio/go-admin/template/icon"
+	"github.com/backyio/go-admin/template/types"
+	"github.com/backyio/go-admin/template/types/action"
+	"github.com/backyio/go-admin/template/types/form"
+	selection "github.com/backyio/go-admin/template/types/form/select"
+	editType "github.com/backyio/go-admin/template/types/table"
 )
 
 // GetUserTable return the model of table user.

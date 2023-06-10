@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/GoAdminGroup/go-admin/modules/config"
+	"github.com/backyio/go-admin/modules/config"
 	"github.com/gavv/httpexpect"
 )
 
@@ -34,15 +34,15 @@ func normalTest(e *httpexpect.Expect, sesID *http.Cookie) {
 
 	// show form: without id
 
-	//printlnWithColor("show form: without id", "green")
-	//e.GET(config.Url("/info/user/edit")).
+	// printlnWithColor("show form: without id", "green")
+	// e.GET(config.Url("/info/user/edit")).
 	//	WithCookie(sesID.Name, sesID.Value).
 	//	Expect().Status(200).Body().Contains(errors.WrongID)
 
 	// show form
 
-	//printlnWithColor("show form", "green")
-	//e.GET(config.Url("/info/user/edit")).
+	// printlnWithColor("show form", "green")
+	// e.GET(config.Url("/info/user/edit")).
 	//	WithQuery(constant.EditPKKey, "362").
 	//	WithCookie(sesID.Name, sesID.Value).
 	//	Expect().Status(200).Body()

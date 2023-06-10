@@ -12,14 +12,14 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/GoAdminGroup/go-admin/adapter"
-	"github.com/GoAdminGroup/go-admin/context"
-	"github.com/GoAdminGroup/go-admin/engine"
-	"github.com/GoAdminGroup/go-admin/modules/config"
-	"github.com/GoAdminGroup/go-admin/plugins"
-	"github.com/GoAdminGroup/go-admin/plugins/admin/models"
-	"github.com/GoAdminGroup/go-admin/plugins/admin/modules/constant"
-	"github.com/GoAdminGroup/go-admin/template/types"
+	"github.com/backyio/go-admin/adapter"
+	"github.com/backyio/go-admin/context"
+	"github.com/backyio/go-admin/engine"
+	"github.com/backyio/go-admin/modules/config"
+	"github.com/backyio/go-admin/plugins"
+	"github.com/backyio/go-admin/plugins/admin/models"
+	"github.com/backyio/go-admin/plugins/admin/modules/constant"
+	"github.com/backyio/go-admin/template/types"
 	"github.com/gobuffalo/buffalo"
 )
 

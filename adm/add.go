@@ -4,9 +4,9 @@ import (
 	"runtime"
 	"strings"
 
-	"github.com/GoAdminGroup/go-admin/modules/auth"
-	"github.com/GoAdminGroup/go-admin/modules/db"
-	"github.com/GoAdminGroup/go-admin/modules/db/dialect"
+	"github.com/backyio/go-admin/modules/auth"
+	"github.com/backyio/go-admin/modules/db"
+	"github.com/backyio/go-admin/modules/db/dialect"
 	"gopkg.in/ini.v1"
 )
 
@@ -77,7 +77,7 @@ func addUser(cfgFile string) {
 		userPassword = promptWithDefault("user password", "")
 	}
 
-	checkExist, err := db.WithDriver(conn).Table("goadmin_users").
+	checkExist, err := db.WithDriver(conn).Table("admin_users").
 		Where("name", "=", name).
 		First()
 
@@ -89,7 +89,7 @@ func addUser(cfgFile string) {
 		panic(newError("user record exists"))
 	}
 
-	_, err = db.WithDriver(conn).Table("goadmin_users").
+	_, err = db.WithDriver(conn).Table("admin_users").
 		Insert(dialect.H{
 			"name":     name,
 			"username": nickname,
@@ -196,7 +196,7 @@ func insertPermissionOfTable(conn db.Connection, table string) {
 }
 
 func insertPermissionInfoDB(conn db.Connection, name, slug, httpMethod, httpPath string) {
-	checkExist, err := db.WithDriver(conn).Table("goadmin_permissions").
+	checkExist, err := db.WithDriver(conn).Table("admin_permissions").
 		Where("slug", "=", slug).
 		First()
 
@@ -208,7 +208,7 @@ func insertPermissionInfoDB(conn db.Connection, name, slug, httpMethod, httpPath
 		return
 	}
 
-	_, err = db.WithDriver(conn).Table("goadmin_permissions").
+	_, err = db.WithDriver(conn).Table("admin_permissions").
 		Insert(dialect.H{
 			"name":        name,
 			"slug":        slug,

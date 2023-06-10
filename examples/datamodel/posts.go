@@ -3,13 +3,13 @@ package datamodel
 import (
 	template2 "html/template"
 
-	"github.com/GoAdminGroup/go-admin/context"
-	"github.com/GoAdminGroup/go-admin/modules/db"
-	"github.com/GoAdminGroup/go-admin/plugins/admin/modules/table"
-	"github.com/GoAdminGroup/go-admin/template"
-	"github.com/GoAdminGroup/go-admin/template/types"
-	"github.com/GoAdminGroup/go-admin/template/types/form"
-	editType "github.com/GoAdminGroup/go-admin/template/types/table"
+	"github.com/backyio/go-admin/context"
+	"github.com/backyio/go-admin/modules/db"
+	"github.com/backyio/go-admin/plugins/admin/modules/table"
+	"github.com/backyio/go-admin/template"
+	"github.com/backyio/go-admin/template/types"
+	"github.com/backyio/go-admin/template/types/form"
+	editType "github.com/backyio/go-admin/template/types/table"
 )
 
 // GetPostsTable return the model of table posts.
@@ -30,8 +30,8 @@ func GetPostsTable(ctx *context.Context) (postsTable table.Table) {
 			GetContent()
 	})
 	info.AddField("AuthorName", "name", db.Varchar).FieldDisplay(func(value types.FieldModel) interface{} {
-		first, _ := value.Row["authors_goadmin_join_first_name"].(string)
-		last, _ := value.Row["authors_goadmin_join_last_name"].(string)
+		first, _ := value.Row["authors_admin_join_first_name"].(string)
+		last, _ := value.Row["authors_admin_join_last_name"].(string)
 		return first + " " + last
 	})
 	info.AddField("AuthorFirstName", "first_name", db.Varchar).FieldJoin(types.Join{

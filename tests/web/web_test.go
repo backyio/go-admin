@@ -1,22 +1,23 @@
 package web
 
 import (
-	"io/ioutil"
+	"fmt"
 	"log"
+	"net/http"
 	"os"
 	"testing"
 
-	_ "github.com/GoAdminGroup/go-admin/adapter/gin"
-	_ "github.com/GoAdminGroup/go-admin/modules/db/drivers/mysql"
-	_ "github.com/GoAdminGroup/themes/adminlte"
+	_ "github.com/backyio/go-admin/adapter/buffalo"
+	_ "github.com/backyio/go-admin/modules/db/drivers/postgres"
+	_ "github.com/backyio/go-admin/themes/adminlte"
 
-	"github.com/GoAdminGroup/go-admin/engine"
-	"github.com/GoAdminGroup/go-admin/modules/config"
-	"github.com/GoAdminGroup/go-admin/plugins/admin"
-	"github.com/GoAdminGroup/go-admin/template"
-	"github.com/GoAdminGroup/go-admin/template/chartjs"
-	"github.com/GoAdminGroup/go-admin/tests/tables"
-	"github.com/gin-gonic/gin"
+	"github.com/backyio/go-admin/engine"
+	"github.com/backyio/go-admin/modules/config"
+	"github.com/backyio/go-admin/plugins/admin"
+	"github.com/backyio/go-admin/template"
+	"github.com/backyio/go-admin/template/chartjs"
+	"github.com/backyio/go-admin/tests/tables"
+	"github.com/gobuffalo/buffalo"
 )
 
 const (
@@ -43,8 +44,8 @@ const (
 	multiSelectLi3          = `/html/body/span/span/span/ul/li[3]`
 	multiSelectRes          = `//*[@id="pjax-container"]/section[2]/div/div/div[2]/form/div[1]/div/div[1]/div/div/div[2]/div/span/span[1]/span/ul/li[1]`
 	filterNameField         = `//*[@id="pjax-container"]/section[2]/div/div/div[2]/form/div[1]/div/div[1]/div/div/div[1]/div/div/input`
-	filterCreatedStart      = `//*[@id="created_at_start__goadmin"]`
-	filterCreatedEnd        = `//*[@id="created_at_end__goadmin"]`
+	filterCreatedStart      = `//*[@id="created_at_start__admin"]`
+	filterCreatedEnd        = `//*[@id="created_at_end__admin"]`
 	radio                   = `//*[@id="pjax-container"]/section[2]/div/div/div[2]/form/div[1]/div/div[3]/div/div/div[1]/div/div[1]`
 	searchBtn               = `//*[@id="pjax-container"]/section[2]/div/div/div[2]/form/div[2]/div[2]/div[1]/button`
 	filterResetBtn          = `//*[@id="pjax-container"]/section[2]/div/div/div[2]/form/div[2]/div[2]/div[2]/a`
@@ -80,7 +81,7 @@ const (
 	appleOptField      = `//*[@id="bootstrap-duallistbox-nonselected-list_fruit[]"]/option[1]`
 	bananaOptField     = `//*[@id="bootstrap-duallistbox-nonselected-list_fruit[]"]/option[2]`
 	watermelonOptField = `//*[@id="bootstrap-duallistbox-nonselected-list_fruit[]"]/option[3]`
-	//pearOptField          = `//*[@id="bootstrap-duallistbox-nonselected-list_fruit[]"]/option[4]`
+	// pearOptField          = `//*[@id="bootstrap-duallistbox-nonselected-list_fruit[]"]/option[4]`
 	genderBoyCheckBox     = `//*[@id="tab-form-1"]/div[5]/div/div/div[1]`
 	genderGirlCheckBox    = `//*[@id="tab-form-1"]/div[5]/div/div/div[2]`
 	experienceDropDown    = `//*[@id="tab-form-1"]/div[7]/div/span/span[1]/span/span[2]`
@@ -193,13 +194,10 @@ func init() {
 }
 
 func startServer(quit chan struct{}) {
-
-	if !debugMode {
-		gin.SetMode(gin.ReleaseMode)
-		gin.DefaultWriter = ioutil.Discard
-	}
-
-	r := gin.New()
+	bu := buffalo.New(buffalo.Options{
+		Env:  "test",
+		Addr: fmt.Sprintf("127.0.0.1:%s", port),
+	})
 
 	eng := engine.Default()
 
@@ -217,16 +215,16 @@ func startServer(quit chan struct{}) {
 
 	if err := eng.AddConfig(&cfg).
 		AddPlugins(adminPlugin).
-		Use(r); err != nil {
+		Use(bu); err != nil {
 		panic(err)
 	}
 
 	eng.HTML("GET", "/admin", tables.GetContent)
 
-	r.Static("/uploads", "./uploads")
+	bu.ServeFiles("/uploads", http.Dir("./uploads"))
 
 	go func() {
-		_ = r.Run(port)
+		_ = bu.Serve()
 	}()
 
 	<-quit
@@ -267,23 +265,23 @@ func testInfoTablePageOperations(page *Page) {
 	// Nav link Check
 	// =============================
 
-	//printPart("nav link check")
-	//page.Click(sideBarManageDropDown)
-	//page.Click(managerPageBtn)
-	//page.Click(rolesPageBtn)
-	//page.Click(permissionPageBtn)
-	//page.Click(menuPageBtn)
-	//page.Click(operationLogPageBtn)
-	//page.Click(navLinkBtn)
-	//page.Click(navCloseBtn)
-	//page.Click(navLinkBtn)
-	//page.Click(navCloseBtn)
-	//page.Click(navLinkBtn)
-	//page.Click(navCloseBtn)
-	//page.Click(navLinkBtn)
-	//page.Click(navCloseBtn)
-	//page.Click(navLinkBtn)
-	//page.Click(navCloseBtn)
+	// printPart("nav link check")
+	// page.Click(sideBarManageDropDown)
+	// page.Click(managerPageBtn)
+	// page.Click(rolesPageBtn)
+	// page.Click(permissionPageBtn)
+	// page.Click(menuPageBtn)
+	// page.Click(operationLogPageBtn)
+	// page.Click(navLinkBtn)
+	// page.Click(navCloseBtn)
+	// page.Click(navLinkBtn)
+	// page.Click(navCloseBtn)
+	// page.Click(navLinkBtn)
+	// page.Click(navCloseBtn)
+	// page.Click(navLinkBtn)
+	// page.Click(navCloseBtn)
+	// page.Click(navLinkBtn)
+	// page.Click(navCloseBtn)
 
 	page.NavigateTo(url("/info/user"))
 
@@ -355,8 +353,8 @@ func testInfoTablePageOperations(page *Page) {
 
 	page.Fill(filterNameField, "Jack")
 
-	//page.Fill(filterCreatedStart, "2020-03-08 15:24:00")
-	//page.Click(filterCreatedEnd)
+	// page.Fill(filterCreatedStart, "2020-03-08 15:24:00")
+	// page.Click(filterCreatedEnd)
 
 	page.Click(searchBtn, 2)
 
@@ -498,7 +496,7 @@ func checkSelectionsInForm(page *Page) {
 	page.Text(appleOptField, "Apple")
 	page.Text(bananaOptField, "Banana")
 	page.Text(watermelonOptField, "Watermelon")
-	//page.Text(pearOptField, "")
+	// page.Text(pearOptField, "")
 	page.Click(experienceDropDown)
 	page.Text(twoYearsSelection, "two years")
 	page.Text(threeYearsSelection, "three years")
@@ -601,11 +599,11 @@ func testMenuPageOperations(page *Page) {
 
 	// change order check
 
-	//item := page.FindByXPath(testMenuItem)
-	//assert.Equal(t, item.MouseToElement(), nil)
-	//assert.Equal(t, page.Click(agouti.HoldClick, agouti.LeftButton), nil)
-	//assert.Equal(t, item.ScrollFinger(0, -200), nil)
-	//assert.Equal(t, page.Click(agouti.HoldClick, agouti.LeftButton), nil)
+	// item := page.FindByXPath(testMenuItem)
+	// assert.Equal(t, item.MouseToElement(), nil)
+	// assert.Equal(t, page.Click(agouti.HoldClick, agouti.LeftButton), nil)
+	// assert.Equal(t, item.ScrollFinger(0, -200), nil)
+	// assert.Equal(t, page.Click(agouti.HoldClick, agouti.LeftButton), nil)
 
 	// Delete Check
 	// =============================

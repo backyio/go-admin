@@ -3,8 +3,8 @@ package action
 import (
 	"html/template"
 
-	"github.com/GoAdminGroup/go-admin/context"
-	"github.com/GoAdminGroup/go-admin/modules/utils"
+	"github.com/backyio/go-admin/context"
+	"github.com/backyio/go-admin/modules/utils"
 )
 
 type JumpAction struct {

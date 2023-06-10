@@ -4,10 +4,10 @@ import (
 	"bytes"
 	"html/template"
 
-	"github.com/GoAdminGroup/go-admin/modules/remote_server"
+	"github.com/backyio/go-admin/modules/remote_server"
 
-	"github.com/GoAdminGroup/go-admin/modules/language"
-	"github.com/GoAdminGroup/go-admin/modules/logger"
+	"github.com/backyio/go-admin/modules/language"
+	"github.com/backyio/go-admin/modules/logger"
 )
 
 func GetPluginsPageJS(data PluginsPageJSData) template.JS {
@@ -41,8 +41,8 @@ function pluginInstall(name){
 }
 
 var downloadLock = false;
-const apiTokenKey = "GOADMIN_SERVER_API_TOKEN";
-const apiTokenExpireKey = "GOADMIN_SERVER_API_TOKEN_EXPIRE";
+const apiTokenKey = "ADMIN_SERVER_API_TOKEN";
+const apiTokenExpireKey = "ADMIN_SERVER_API_TOKEN_EXPIRE";
 const serverHost = "` + remote_server.ServerHost + `"
 
 function login() {

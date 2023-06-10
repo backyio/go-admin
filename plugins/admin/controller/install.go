@@ -5,21 +5,21 @@ import (
 	"database/sql"
 	"net/http"
 
-	"github.com/GoAdminGroup/go-admin/context"
-	"github.com/GoAdminGroup/go-admin/plugins/admin/modules/response"
+	"github.com/backyio/go-admin/context"
+	"github.com/backyio/go-admin/plugins/admin/modules/response"
 )
 
 // ShowInstall show install page.
 func (h *Handler) ShowInstall(ctx *context.Context) {
 
 	buffer := new(bytes.Buffer)
-	//template.GetInstallPage(buffer)
+	// template.GetInstallPage(buffer)
 
-	//rs, _ := mysql.Query("show tables;")
-	//fmt.Println(rs[0]["Tables_in_godmin"])
+	// rs, _ := mysql.Query("show tables;")
+	// fmt.Println(rs[0]["Tables_in_godmin"])
 
-	//rs2, _ := mysql.Query("show columns from users")
-	//fmt.Println(rs2[0]["Field"])
+	// rs2, _ := mysql.Query("show columns from users")
+	// fmt.Println(rs2[0]["Field"])
 
 	ctx.HTML(http.StatusOK, buffer.String())
 }
@@ -51,7 +51,7 @@ func (h *Handler) CheckDatabase(ctx *context.Context) {
 
 	}
 
-	//db.InitDB(username, password, port, ip, databaseName, 100, 100)
+	// db.InitDB(username, password, port, ip, databaseName, 100, 100)
 
 	tables := make([]map[string]interface{}, 0)
 

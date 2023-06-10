@@ -6,9 +6,9 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/GoAdminGroup/go-admin/modules/system"
+	"github.com/backyio/go-admin/modules/system"
 
-	"github.com/GoAdminGroup/go-admin/modules/logger"
+	"github.com/backyio/go-admin/modules/logger"
 )
 
 const (
@@ -122,7 +122,7 @@ func GetDownloadURL(uuid, token string) (string, string, error) {
 	return resData.Data.Url, resData.Data.ExtraUrl, nil
 }
 
-const TokenKey = "GOADMIN_OFFICIAL_SESS"
+const TokenKey = "ADMIN_OFFICIAL_SESS"
 
 type GetOnlineReq struct {
 	Page       string `json:"page"`

@@ -1,10 +1,10 @@
 package datamodel
 
 import (
-	"github.com/GoAdminGroup/go-admin/context"
-	"github.com/GoAdminGroup/go-admin/modules/db"
-	"github.com/GoAdminGroup/go-admin/plugins/admin/modules/table"
-	"github.com/GoAdminGroup/go-admin/template/types/form"
+	"github.com/backyio/go-admin/context"
+	"github.com/backyio/go-admin/modules/db"
+	"github.com/backyio/go-admin/plugins/admin/modules/table"
+	"github.com/backyio/go-admin/template/types/form"
 )
 
 func GetGoadminSuperUsersTable(ctx *context.Context) table.Table {
@@ -22,7 +22,7 @@ func GetGoadminSuperUsersTable(ctx *context.Context) table.Table {
 	info.AddField("Created_at", "created_at", db.Timestamp)
 	info.AddField("Updated_at", "updated_at", db.Timestamp)
 
-	info.SetTable("goadmin_super_users").SetTitle("GoadminSuperUsers").SetDescription("GoadminSuperUsers")
+	info.SetTable("admin_super_users").SetTitle("AdminSuperUsers").SetDescription("AdminSuperUsers")
 
 	formList := goadminSuperUsers.GetForm()
 	formList.AddField("Id", "id", db.Int, form.Default)
@@ -34,7 +34,7 @@ func GetGoadminSuperUsersTable(ctx *context.Context) table.Table {
 	formList.AddField("Created_at", "created_at", db.Timestamp, form.Datetime)
 	formList.AddField("Updated_at", "updated_at", db.Timestamp, form.Datetime)
 
-	formList.SetTable("goadmin_super_users").SetTitle("GoadminSuperUsers").SetDescription("GoadminSuperUsers")
+	formList.SetTable("admin_super_users").SetTitle("AdminSuperUsers").SetDescription("AdminSuperUsers")
 
 	return goadminSuperUsers
 }

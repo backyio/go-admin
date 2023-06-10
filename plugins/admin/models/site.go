@@ -3,12 +3,12 @@ package models
 import (
 	"database/sql"
 
-	"github.com/GoAdminGroup/go-admin/modules/utils"
+	"github.com/backyio/go-admin/modules/utils"
 
-	"github.com/GoAdminGroup/go-admin/modules/collection"
-	"github.com/GoAdminGroup/go-admin/modules/db"
-	"github.com/GoAdminGroup/go-admin/modules/db/dialect"
-	"github.com/GoAdminGroup/go-admin/plugins/admin/modules/form"
+	"github.com/backyio/go-admin/modules/collection"
+	"github.com/backyio/go-admin/modules/db"
+	"github.com/backyio/go-admin/modules/db/dialect"
+	"github.com/backyio/go-admin/plugins/admin/modules/form"
 )
 
 // SiteModel is role model structure.
@@ -32,7 +32,7 @@ const (
 
 // Site return a default role model.
 func Site() SiteModel {
-	return SiteModel{Base: Base{TableName: "goadmin_site"}}
+	return SiteModel{Base: Base{TableName: "admin_site"}}
 }
 
 func (t SiteModel) SetConn(con db.Connection) SiteModel {
@@ -63,7 +63,7 @@ func (t SiteModel) Init(cfg map[string]string) SiteModel {
 				panic(err)
 			}
 		}
-		//else {
+		// else {
 		//	if value != "" {
 		//		_, err := t.Table(t.TableName).
 		//			Where("key", "=", key).Update(dialect.H{
@@ -73,7 +73,7 @@ func (t SiteModel) Init(cfg map[string]string) SiteModel {
 		//			panic(err)
 		//		}
 		//	}
-		//}
+		// }
 	}
 	return t
 }

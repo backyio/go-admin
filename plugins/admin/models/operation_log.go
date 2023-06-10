@@ -1,8 +1,8 @@
 package models
 
 import (
-	"github.com/GoAdminGroup/go-admin/modules/db"
-	"github.com/GoAdminGroup/go-admin/modules/db/dialect"
+	"github.com/backyio/go-admin/modules/db"
+	"github.com/backyio/go-admin/modules/db/dialect"
 )
 
 // OperationLogModel is operation log model structure.
@@ -21,7 +21,7 @@ type OperationLogModel struct {
 
 // OperationLog return a default operation log model.
 func OperationLog() OperationLogModel {
-	return OperationLogModel{Base: Base{TableName: "goadmin_operation_log"}}
+	return OperationLogModel{Base: Base{TableName: "admin_operation_log"}}
 }
 
 // Find return a default operation log model of given id.

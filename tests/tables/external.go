@@ -1,11 +1,11 @@
 package tables
 
 import (
-	"github.com/GoAdminGroup/go-admin/context"
-	"github.com/GoAdminGroup/go-admin/modules/db"
-	"github.com/GoAdminGroup/go-admin/plugins/admin/modules/parameter"
-	"github.com/GoAdminGroup/go-admin/plugins/admin/modules/table"
-	"github.com/GoAdminGroup/go-admin/template/types/form"
+	"github.com/backyio/go-admin/context"
+	"github.com/backyio/go-admin/modules/db"
+	"github.com/backyio/go-admin/plugins/admin/modules/parameter"
+	"github.com/backyio/go-admin/plugins/admin/modules/table"
+	"github.com/backyio/go-admin/template/types/form"
 )
 
 // GetExternalTable return the model from external data source.

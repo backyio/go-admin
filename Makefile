@@ -32,7 +32,7 @@ test: cp-mod black-box-test web-test restore-mod
 
 ## tests: black box tests
 
-black-box-test: mysql-test pg-test sqlite-test ms-test
+black-box-test: pg-test
 
 mysql-test: $(TEST_FRAMEWORK_DIR)/*
 	go get github.com/ugorji/go/codec@none

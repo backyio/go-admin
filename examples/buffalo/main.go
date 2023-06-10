@@ -7,17 +7,17 @@ import (
 	"os/signal"
 	"time"
 
-	_ "github.com/GoAdminGroup/go-admin/adapter/buffalo"
-	_ "github.com/GoAdminGroup/go-admin/modules/db/drivers/mysql"
+	_ "github.com/backyio/go-admin/adapter/buffalo"
+	_ "github.com/backyio/go-admin/modules/db/drivers/mysql"
 
-	"github.com/GoAdminGroup/go-admin/engine"
-	"github.com/GoAdminGroup/go-admin/examples/datamodel"
-	"github.com/GoAdminGroup/go-admin/modules/config"
-	"github.com/GoAdminGroup/go-admin/modules/language"
-	"github.com/GoAdminGroup/go-admin/plugins/example"
-	"github.com/GoAdminGroup/go-admin/template"
-	"github.com/GoAdminGroup/go-admin/template/chartjs"
-	"github.com/GoAdminGroup/themes/adminlte"
+	"github.com/backyio/go-admin/engine"
+	"github.com/backyio/go-admin/examples/datamodel"
+	"github.com/backyio/go-admin/modules/config"
+	"github.com/backyio/go-admin/modules/language"
+	"github.com/backyio/go-admin/plugins/example"
+	"github.com/backyio/go-admin/template"
+	"github.com/backyio/go-admin/template/chartjs"
+	"github.com/backyio/go-admin/themes/adminlte"
 	"github.com/gobuffalo/buffalo"
 )
 
@@ -66,7 +66,7 @@ func main() {
 	// examplePlugin := plugins.LoadFromPlugin("../datamodel/example.so")
 
 	// customize the login page
-	// example: https://github.com/GoAdminGroup/demo.go-admin.cn/blob/master/main.go#L39
+	// example: https://github.com/backyio/go-admin/demo.go-admin.cn/blob/master/main.go#L39
 	//
 	// template.AddComp("login", datamodel.LoginPage)
 

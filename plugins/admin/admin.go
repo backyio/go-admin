@@ -1,18 +1,18 @@
 package admin
 
 import (
-	"github.com/GoAdminGroup/go-admin/context"
-	"github.com/GoAdminGroup/go-admin/modules/config"
-	"github.com/GoAdminGroup/go-admin/modules/service"
-	"github.com/GoAdminGroup/go-admin/modules/system"
-	"github.com/GoAdminGroup/go-admin/modules/utils"
-	"github.com/GoAdminGroup/go-admin/plugins"
-	"github.com/GoAdminGroup/go-admin/plugins/admin/controller"
-	"github.com/GoAdminGroup/go-admin/plugins/admin/modules/guard"
-	"github.com/GoAdminGroup/go-admin/plugins/admin/modules/table"
-	"github.com/GoAdminGroup/go-admin/template/types"
-	"github.com/GoAdminGroup/go-admin/template/types/action"
-	_ "github.com/GoAdminGroup/go-admin/template/types/display"
+	"github.com/backyio/go-admin/context"
+	"github.com/backyio/go-admin/modules/config"
+	"github.com/backyio/go-admin/modules/service"
+	"github.com/backyio/go-admin/modules/system"
+	"github.com/backyio/go-admin/modules/utils"
+	"github.com/backyio/go-admin/plugins"
+	"github.com/backyio/go-admin/plugins/admin/controller"
+	"github.com/backyio/go-admin/plugins/admin/modules/guard"
+	"github.com/backyio/go-admin/plugins/admin/modules/table"
+	"github.com/backyio/go-admin/template/types"
+	"github.com/backyio/go-admin/template/types/action"
+	_ "github.com/backyio/go-admin/template/types/display"
 )
 
 // Admin is a GoAdmin plugin.

@@ -8,12 +8,12 @@ import (
 	"strings"
 	"time"
 
-	"github.com/GoAdminGroup/go-admin/modules/config"
-	"github.com/GoAdminGroup/go-admin/modules/db"
-	"github.com/GoAdminGroup/go-admin/modules/db/dialect"
-	"github.com/GoAdminGroup/go-admin/modules/logger"
-	"github.com/GoAdminGroup/go-admin/modules/utils"
-	"github.com/GoAdminGroup/go-admin/plugins/admin/modules/constant"
+	"github.com/backyio/go-admin/modules/config"
+	"github.com/backyio/go-admin/modules/db"
+	"github.com/backyio/go-admin/modules/db/dialect"
+	"github.com/backyio/go-admin/modules/logger"
+	"github.com/backyio/go-admin/modules/utils"
+	"github.com/backyio/go-admin/plugins/admin/modules/constant"
 )
 
 // UserModel is user model structure.
@@ -243,11 +243,11 @@ func (t UserModel) UpdateAvatar(avatar string) {
 
 // WithRoles query the role info of the user.
 func (t UserModel) WithRoles() UserModel {
-	roleModel, _ := t.Table("goadmin_role_users").
-		LeftJoin("goadmin_roles", "goadmin_roles.id", "=", "goadmin_role_users.role_id").
+	roleModel, _ := t.Table("admin_role_users").
+		LeftJoin("admin_roles", "admin_roles.id", "=", "admin_role_users.role_id").
 		Where("user_id", "=", t.Id).
-		Select("goadmin_roles.id", "goadmin_roles.name", "goadmin_roles.slug",
-			"goadmin_roles.created_at", "goadmin_roles.updated_at").
+		Select("admin_roles.id", "admin_roles.name", "admin_roles.slug",
+			"admin_roles.created_at", "admin_roles.updated_at").
 		All()
 
 	for _, role := range roleModel {
@@ -281,21 +281,21 @@ func (t UserModel) WithPermissions() UserModel {
 	roleIds := t.GetAllRoleId()
 
 	if len(roleIds) > 0 {
-		permissions, _ = t.Table("goadmin_role_permissions").
-			LeftJoin("goadmin_permissions", "goadmin_permissions.id", "=", "goadmin_role_permissions.permission_id").
+		permissions, _ = t.Table("admin_role_permissions").
+			LeftJoin("admin_permissions", "admin_permissions.id", "=", "admin_role_permissions.permission_id").
 			WhereIn("role_id", roleIds).
-			Select("goadmin_permissions.http_method", "goadmin_permissions.http_path",
-				"goadmin_permissions.id", "goadmin_permissions.name", "goadmin_permissions.slug",
-				"goadmin_permissions.created_at", "goadmin_permissions.updated_at").
+			Select("admin_permissions.http_method", "admin_permissions.http_path",
+				"admin_permissions.id", "admin_permissions.name", "admin_permissions.slug",
+				"admin_permissions.created_at", "admin_permissions.updated_at").
 			All()
 	}
 
-	userPermissions, _ := t.Table("goadmin_user_permissions").
-		LeftJoin("goadmin_permissions", "goadmin_permissions.id", "=", "goadmin_user_permissions.permission_id").
+	userPermissions, _ := t.Table("admin_user_permissions").
+		LeftJoin("admin_permissions", "admin_permissions.id", "=", "admin_user_permissions.permission_id").
 		Where("user_id", "=", t.Id).
-		Select("goadmin_permissions.http_method", "goadmin_permissions.http_path",
-			"goadmin_permissions.id", "goadmin_permissions.name", "goadmin_permissions.slug",
-			"goadmin_permissions.created_at", "goadmin_permissions.updated_at").
+		Select("admin_permissions.http_method", "admin_permissions.http_path",
+			"admin_permissions.id", "admin_permissions.name", "admin_permissions.slug",
+			"admin_permissions.created_at", "admin_permissions.updated_at").
 		All()
 
 	permissions = append(permissions, userPermissions...)
@@ -323,16 +323,16 @@ func (t UserModel) WithMenus() UserModel {
 	var menuIdsModel []map[string]interface{}
 
 	if t.IsSuperAdmin() {
-		menuIdsModel, _ = t.Table("goadmin_role_menu").
-			LeftJoin("goadmin_menu", "goadmin_menu.id", "=", "goadmin_role_menu.menu_id").
+		menuIdsModel, _ = t.Table("admin_role_menu").
+			LeftJoin("admin_menu", "admin_menu.id", "=", "admin_role_menu.menu_id").
 			Select("menu_id", "parent_id").
 			All()
 	} else {
 		rolesId := t.GetAllRoleId()
 		if len(rolesId) > 0 {
-			menuIdsModel, _ = t.Table("goadmin_role_menu").
-				LeftJoin("goadmin_menu", "goadmin_menu.id", "=", "goadmin_role_menu.menu_id").
-				WhereIn("goadmin_role_menu.role_id", rolesId).
+			menuIdsModel, _ = t.Table("admin_role_menu").
+				LeftJoin("admin_menu", "admin_menu.id", "=", "admin_role_menu.menu_id").
+				WhereIn("admin_role_menu.role_id", rolesId).
 				Select("menu_id", "parent_id").
 				All()
 		}
@@ -413,7 +413,7 @@ func (t UserModel) UpdatePwd(password string) UserModel {
 
 // CheckRole check the role of the user model.
 func (t UserModel) CheckRoleId(roleId string) bool {
-	checkRole, _ := t.Table("goadmin_role_users").
+	checkRole, _ := t.Table("admin_role_users").
 		Where("role_id", "=", roleId).
 		Where("user_id", "=", t.Id).
 		First()
@@ -422,7 +422,7 @@ func (t UserModel) CheckRoleId(roleId string) bool {
 
 // DeleteRoles delete all the roles of the user model.
 func (t UserModel) DeleteRoles() error {
-	return t.Table("goadmin_role_users").
+	return t.Table("admin_role_users").
 		Where("user_id", "=", t.Id).
 		Delete()
 }
@@ -431,7 +431,7 @@ func (t UserModel) DeleteRoles() error {
 func (t UserModel) AddRole(roleId string) (int64, error) {
 	if roleId != "" {
 		if !t.CheckRoleId(roleId) {
-			return t.WithTx(t.Tx).Table("goadmin_role_users").
+			return t.WithTx(t.Tx).Table("admin_role_users").
 				Insert(dialect.H{
 					"role_id": roleId,
 					"user_id": t.Id,
@@ -454,7 +454,7 @@ func (t UserModel) CheckRole(slug string) bool {
 
 // CheckPermission check the permission of the user.
 func (t UserModel) CheckPermissionById(permissionId string) bool {
-	checkPermission, _ := t.Table("goadmin_user_permissions").
+	checkPermission, _ := t.Table("admin_user_permissions").
 		Where("permission_id", "=", permissionId).
 		Where("user_id", "=", t.Id).
 		First()
@@ -474,7 +474,7 @@ func (t UserModel) CheckPermission(permission string) bool {
 
 // DeletePermissions delete all the permissions of the user model.
 func (t UserModel) DeletePermissions() error {
-	return t.WithTx(t.Tx).Table("goadmin_user_permissions").
+	return t.WithTx(t.Tx).Table("admin_user_permissions").
 		Where("user_id", "=", t.Id).
 		Delete()
 }
@@ -483,7 +483,7 @@ func (t UserModel) DeletePermissions() error {
 func (t UserModel) AddPermission(permissionId string) (int64, error) {
 	if permissionId != "" {
 		if !t.CheckPermissionById(permissionId) {
-			return t.WithTx(t.Tx).Table("goadmin_user_permissions").
+			return t.WithTx(t.Tx).Table("admin_user_permissions").
 				Insert(dialect.H{
 					"permission_id": permissionId,
 					"user_id":       t.Id,

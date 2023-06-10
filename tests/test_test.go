@@ -4,23 +4,24 @@ import (
 	"testing"
 	"time"
 
-	"github.com/GoAdminGroup/go-admin/modules/config"
-	"github.com/GoAdminGroup/go-admin/tests/frameworks/gin"
+	"github.com/backyio/go-admin/modules/config"
+	"github.com/backyio/go-admin/tests/frameworks/buffalo"
 )
 
 func TestBlackBoxTestSuitOfBuiltInTables(t *testing.T) {
-	BlackBoxTestSuitOfBuiltInTables(t, gin.NewHandler, config.DatabaseList{
+
+	BlackBoxTestSuitOfBuiltInTables(t, buffalo.NewHandler, config.DatabaseList{
 		"default": {
 			Host:            "127.0.0.1",
-			Port:            "3306",
+			Port:            "26257",
 			User:            "root",
-			Pwd:             "root",
+			Pwd:             "",
 			Name:            "go-admin-test",
 			MaxIdleConns:    50,
 			MaxOpenConns:    150,
 			ConnMaxLifetime: time.Hour,
 			ConnMaxIdleTime: 0,
-			Driver:          config.DriverMysql,
+			Driver:          config.DriverPostgresql,
 		},
 	})
 }

@@ -7,14 +7,14 @@ package auth
 import (
 	"sync"
 
-	"github.com/GoAdminGroup/go-admin/modules/db/dialect"
-	"github.com/GoAdminGroup/go-admin/modules/logger"
+	"github.com/backyio/go-admin/modules/db/dialect"
+	"github.com/backyio/go-admin/modules/logger"
 
-	"github.com/GoAdminGroup/go-admin/context"
-	"github.com/GoAdminGroup/go-admin/modules/db"
-	"github.com/GoAdminGroup/go-admin/modules/service"
-	"github.com/GoAdminGroup/go-admin/plugins/admin/models"
-	"github.com/GoAdminGroup/go-admin/plugins/admin/modules"
+	"github.com/backyio/go-admin/context"
+	"github.com/backyio/go-admin/modules/db"
+	"github.com/backyio/go-admin/modules/service"
+	"github.com/backyio/go-admin/plugins/admin/models"
+	"github.com/backyio/go-admin/plugins/admin/modules"
 	"golang.org/x/crypto/bcrypt"
 )
 
@@ -89,7 +89,7 @@ func (s *TokenService) Name() string {
 }
 
 func InitCSRFTokenSrv(conn db.Connection) (string, service.Service) {
-	list, err := db.WithDriver(conn).Table("goadmin_session").
+	list, err := db.WithDriver(conn).Table("admin_session").
 		Where("values", "=", "__csrf_token__").
 		All()
 	if db.CheckError(err, db.QUERY) {
@@ -123,7 +123,7 @@ func (s *TokenService) AddToken() string {
 	defer s.lock.Unlock()
 	tokenStr := modules.Uuid()
 	s.tokens = append(s.tokens, tokenStr)
-	_, err := db.WithDriver(s.conn).Table("goadmin_session").Insert(dialect.H{
+	_, err := db.WithDriver(s.conn).Table("admin_session").Insert(dialect.H{
 		"sid":    tokenStr,
 		"values": "__csrf_token__",
 	})
@@ -139,7 +139,7 @@ func (s *TokenService) CheckToken(toCheckToken string) bool {
 	for i := 0; i < len(s.tokens); i++ {
 		if (s.tokens)[i] == toCheckToken {
 			s.tokens = append((s.tokens)[:i], (s.tokens)[i+1:]...)
-			err := db.WithDriver(s.conn).Table("goadmin_session").
+			err := db.WithDriver(s.conn).Table("admin_session").
 				Where("sid", "=", toCheckToken).
 				Where("values", "=", "__csrf_token__").
 				Delete()

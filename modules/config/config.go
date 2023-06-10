@@ -17,9 +17,9 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/GoAdminGroup/go-admin/modules/logger"
-	"github.com/GoAdminGroup/go-admin/modules/utils"
-	"github.com/GoAdminGroup/go-admin/plugins/admin/modules/form"
+	"github.com/backyio/go-admin/modules/logger"
+	"github.com/backyio/go-admin/modules/utils"
+	"github.com/backyio/go-admin/plugins/admin/modules/form"
 	"gopkg.in/ini.v1"
 	"gopkg.in/yaml.v2"
 )
@@ -901,7 +901,7 @@ func SetDefault(cfg *Config) *Config {
 	cfg.Theme = utils.SetDefault(cfg.Theme, "", "adminlte")
 	cfg.IndexUrl = utils.SetDefault(cfg.IndexUrl, "", "/info/manager")
 	cfg.LoginUrl = utils.SetDefault(cfg.LoginUrl, "", "/login")
-	cfg.AuthUserTable = utils.SetDefault(cfg.AuthUserTable, "", "goadmin_users")
+	cfg.AuthUserTable = utils.SetDefault(cfg.AuthUserTable, "", "admin_users")
 	if cfg.Theme == "adminlte" {
 		cfg.ColorScheme = utils.SetDefault(cfg.ColorScheme, "", "skin-black")
 	}

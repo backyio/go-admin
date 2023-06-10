@@ -10,12 +10,12 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/GoAdminGroup/go-admin/context"
-	"github.com/GoAdminGroup/go-admin/modules/config"
-	"github.com/GoAdminGroup/go-admin/modules/db"
-	"github.com/GoAdminGroup/go-admin/modules/db/dialect"
-	"github.com/GoAdminGroup/go-admin/modules/logger"
-	"github.com/GoAdminGroup/go-admin/plugins/admin/modules"
+	"github.com/backyio/go-admin/context"
+	"github.com/backyio/go-admin/modules/config"
+	"github.com/backyio/go-admin/modules/db"
+	"github.com/backyio/go-admin/modules/db/dialect"
+	"github.com/backyio/go-admin/modules/logger"
+	"github.com/backyio/go-admin/plugins/admin/modules"
 )
 
 const DefaultCookieKey = "go_admin_session"
@@ -24,7 +24,7 @@ const DefaultCookieKey = "go_admin_session"
 func newDBDriver(conn db.Connection) *DBDriver {
 	return &DBDriver{
 		conn:      conn,
-		tableName: "goadmin_session",
+		tableName: "admin_session",
 	}
 }
 

@@ -10,11 +10,11 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/GoAdminGroup/go-admin/modules/db/dialect"
+	"github.com/backyio/go-admin/modules/db/dialect"
 
-	"github.com/GoAdminGroup/go-admin/modules/db"
-	"github.com/GoAdminGroup/go-admin/modules/language"
-	"github.com/GoAdminGroup/go-admin/plugins/admin/models"
+	"github.com/backyio/go-admin/modules/db"
+	"github.com/backyio/go-admin/modules/language"
+	"github.com/backyio/go-admin/plugins/admin/models"
 )
 
 // Item is an menu item.
@@ -138,7 +138,7 @@ type NewMenuData struct {
 
 func NewMenu(conn db.Connection, data NewMenuData) (int64, error) {
 	maxOrder := data.Order
-	checkOrder, _ := db.WithDriver(conn).Table("goadmin_menu").
+	checkOrder, _ := db.WithDriver(conn).Table("admin_menu").
 		Where("plugin_name", "=", data.PluginName).
 		OrderBy("order", "desc").
 		First()
@@ -147,7 +147,7 @@ func NewMenu(conn db.Connection, data NewMenuData) (int64, error) {
 		maxOrder = checkOrder["order"].(int64)
 	}
 
-	id, err := db.WithDriver(conn).Table("goadmin_menu").
+	id, err := db.WithDriver(conn).Table("admin_menu").
 		Insert(dialect.H{
 			"parent_id":   data.ParentId,
 			"type":        data.Type,
@@ -181,7 +181,7 @@ func GetGlobalMenu(user models.UserModel, conn db.Connection, lang string, plugi
 	user.WithRoles().WithMenus()
 
 	if user.IsSuperAdmin() {
-		menus, _ = db.WithDriver(conn).Table("goadmin_menu").
+		menus, _ = db.WithDriver(conn).Table("admin_menu").
 			Where("id", ">", 0).
 			Where("plugin_name", "=", plugName).
 			OrderBy("order", "asc").
@@ -193,7 +193,7 @@ func GetGlobalMenu(user models.UserModel, conn db.Connection, lang string, plugi
 			ids = append(ids, user.MenuIds[i])
 		}
 
-		menus, _ = db.WithDriver(conn).Table("goadmin_menu").
+		menus, _ = db.WithDriver(conn).Table("admin_menu").
 			WhereIn("id", ids).
 			Where("plugin_name", "=", plugName).
 			OrderBy("order", "asc").

@@ -5,9 +5,9 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/GoAdminGroup/go-admin/plugins/admin/modules"
-	"github.com/GoAdminGroup/go-admin/plugins/admin/modules/constant"
-	"github.com/GoAdminGroup/go-admin/plugins/admin/modules/form"
+	"github.com/backyio/go-admin/plugins/admin/modules"
+	"github.com/backyio/go-admin/plugins/admin/modules/constant"
+	"github.com/backyio/go-admin/plugins/admin/modules/form"
 )
 
 type Parameters struct {
@@ -44,13 +44,13 @@ const (
 	True  = "true"
 	False = "false"
 
-	FilterRangeParamStartSuffix = "_start__goadmin"
-	FilterRangeParamEndSuffix   = "_end__goadmin"
-	FilterParamJoinInfix        = "_goadmin_join_"
-	FilterParamOperatorSuffix   = "__goadmin_operator__"
-	FilterParamCountInfix       = "__goadmin_index__"
+	FilterRangeParamStartSuffix = "_start__admin"
+	FilterRangeParamEndSuffix   = "_end__admin"
+	FilterParamJoinInfix        = "_admin_join_"
+	FilterParamOperatorSuffix   = "__admin_operator__"
+	FilterParamCountInfix       = "__admin_index__"
 
-	Separator = "__goadmin_separator__"
+	Separator = "__admin_separator__"
 )
 
 var operators = map[string]string{

@@ -5,12 +5,12 @@ import (
 	"html/template"
 	"strings"
 
-	"github.com/GoAdminGroup/go-admin/modules/config"
-	"github.com/GoAdminGroup/go-admin/modules/language"
-	"github.com/GoAdminGroup/go-admin/modules/utils"
-	form2 "github.com/GoAdminGroup/go-admin/plugins/admin/modules/form"
-	"github.com/GoAdminGroup/go-admin/template/types"
-	"github.com/GoAdminGroup/go-admin/template/types/form"
+	"github.com/backyio/go-admin/modules/config"
+	"github.com/backyio/go-admin/modules/language"
+	"github.com/backyio/go-admin/modules/utils"
+	form2 "github.com/backyio/go-admin/plugins/admin/modules/form"
+	"github.com/backyio/go-admin/template/types"
+	"github.com/backyio/go-admin/template/types/form"
 )
 
 type FormAttribute struct {
@@ -207,7 +207,7 @@ func (compo *FormAttribute) GetContent() template.HTML {
 			ii := index % col
 			compo.ContentList[ii] = append(compo.ContentList[ii], compo.Content[i])
 			if i < len(compo.Content)-1 {
-				if strings.Contains(compo.Content[i+1].Field, "__goadmin_operator__") {
+				if strings.Contains(compo.Content[i+1].Field, "__admin_operator__") {
 					compo.ContentList[ii] = append(compo.ContentList[ii], compo.Content[i+1])
 					i++
 				}

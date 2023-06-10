@@ -11,26 +11,26 @@ import (
 
 	"github.com/AlecAivazis/survey/v2"
 	"github.com/AlecAivazis/survey/v2/core"
-	"github.com/GoAdminGroup/go-admin/modules/db"
-	"github.com/GoAdminGroup/go-admin/plugins/admin/modules"
-	"github.com/GoAdminGroup/go-admin/plugins/admin/modules/tools"
+	"github.com/backyio/go-admin/modules/db"
+	"github.com/backyio/go-admin/plugins/admin/modules"
+	"github.com/backyio/go-admin/plugins/admin/modules/tools"
 	"github.com/mgutz/ansi"
 	"github.com/schollz/progressbar"
 	"gopkg.in/ini.v1"
 )
 
 var systemGoAdminTables = []string{
-	"goadmin_menu",
-	"goadmin_operation_log",
-	"goadmin_permissions",
-	"goadmin_role_menu",
-	"goadmin_site",
-	"goadmin_roles",
-	"goadmin_session",
-	"goadmin_users",
-	"goadmin_role_permissions",
-	"goadmin_role_users",
-	"goadmin_user_permissions",
+	"admin_menu",
+	"admin_operation_log",
+	"admin_permissions",
+	"admin_role_menu",
+	"admin_site",
+	"admin_roles",
+	"admin_session",
+	"admin_users",
+	"admin_role_permissions",
+	"admin_role_users",
+	"admin_user_permissions",
 }
 
 func generating(cfgFile, connName string) {
@@ -186,13 +186,13 @@ func generating(cfgFile, connName string) {
 func clear(osName string) {
 
 	if osName == "linux" || osName == "darwin" {
-		cmd := exec.Command("clear") //Linux example, its tested
+		cmd := exec.Command("clear") // Linux example, its tested
 		cmd.Stdout = os.Stdout
 		_ = cmd.Run()
 	}
 
 	if osName == "windows" {
-		cmd := exec.Command("cmd", "/c", "cls") //Windows example, its tested
+		cmd := exec.Command("cmd", "/c", "cls") // Windows example, its tested
 		cmd.Stdout = os.Stdout
 		_ = cmd.Run()
 	}

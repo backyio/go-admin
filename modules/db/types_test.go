@@ -8,8 +8,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/GoAdminGroup/go-admin/modules/config"
-	_ "github.com/GoAdminGroup/go-admin/modules/db/drivers/mysql"
+	"github.com/backyio/go-admin/modules/config"
+	_ "github.com/backyio/go-admin/modules/db/drivers/mysql"
 	"github.com/magiconair/properties/assert"
 )
 
@@ -147,7 +147,7 @@ func TestPostgresqlGetTypeFromString(t *testing.T) {
 	// pg 11
 	testPG(t, "5433")
 	// pg 12
-	//testPG(t, "5434")
+	// testPG(t, "5434")
 }
 
 func testPG(t *testing.T, port string) {
