@@ -12,6 +12,7 @@ import (
 	"time"
 
 	"github.com/backyio/go-admin/context"
+	"github.com/backyio/go-admin/html"
 	"github.com/backyio/go-admin/modules/collection"
 	"github.com/backyio/go-admin/modules/config"
 	"github.com/backyio/go-admin/modules/db"

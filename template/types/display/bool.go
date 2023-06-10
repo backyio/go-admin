@@ -3,6 +3,7 @@ package display
 import (
 	"strings"
 
+	"github.com/backyio/go-admin/html"
 	"github.com/backyio/go-admin/template/icon"
 	"github.com/backyio/go-admin/template/types"
 )
