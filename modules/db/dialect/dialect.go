@@ -49,21 +49,9 @@ func GetDialectByDriver(driver string) Dialect {
 		return mysql{
 			commonDialect: commonDialect{delimiter: "`", delimiter2: "`"},
 		}
-	case "mssql":
-		return mssql{
-			commonDialect: commonDialect{delimiter: "[", delimiter2: "]"},
-		}
 	case "postgresql":
 		return postgresql{
 			commonDialect: commonDialect{delimiter: `"`, delimiter2: `"`},
-		}
-	case "sqlite":
-		return sqlite{
-			commonDialect: commonDialect{delimiter: "`", delimiter2: "`"},
-		}
-	case "oceanbase":
-		return oceanbase{
-			commonDialect: commonDialect{delimiter: "`", delimiter2: "`"},
 		}
 	default:
 		return commonDialect{delimiter: "`", delimiter2: "`"}

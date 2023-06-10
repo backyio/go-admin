@@ -4,7 +4,6 @@ import (
 	"database/sql"
 	"testing"
 
-	_ "github.com/backyio/go-admin/modules/db/drivers/mssql"
 	_ "github.com/backyio/go-admin/modules/db/drivers/postgres"
 	"github.com/magiconair/properties/assert"
 )

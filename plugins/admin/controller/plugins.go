@@ -12,9 +12,8 @@ import (
 	"time"
 
 	"github.com/backyio/go-admin/html"
-	"github.com/backyio/go-admin/modules/system"
-
 	"github.com/backyio/go-admin/modules/logger"
+	"github.com/backyio/go-admin/modules/system"
 
 	"github.com/backyio/go-admin/modules/config"
 
@@ -28,8 +27,9 @@ import (
 	template2 "github.com/backyio/go-admin/template"
 	"github.com/backyio/go-admin/template/types"
 	"github.com/backyio/go-admin/template/types/form"
-	"github.com/gin-gonic/gin"
 )
+
+type H map[string]any
 
 func (h *Handler) Plugins(ctx *context.Context) {
 	list := plugins.Get()
@@ -169,7 +169,7 @@ func (h *Handler) PluginDetail(ctx *context.Context) {
 
 	plug, exist := plugins.FindByNameAll(name)
 	if !exist {
-		ctx.JSON(http.StatusOK, gin.H{
+		ctx.JSON(http.StatusOK, H{
 			"code": 400,
 			"msg":  "bad request",
 		})
@@ -182,10 +182,10 @@ func (h *Handler) PluginDetail(ctx *context.Context) {
 		info.MiniCover = config.Url("/assets/dist/img/plugin_default.png")
 	}
 
-	ctx.JSON(http.StatusOK, gin.H{
+	ctx.JSON(http.StatusOK, H{
 		"code": 0,
 		"msg":  "ok",
-		"data": gin.H{
+		"data": H{
 			"mini_cover":      info.MiniCover,
 			"title":           language.GetWithScope(info.Title, name),
 			"author":          fmt.Sprintf(plugWord("provided by %s"), language.GetWithScope(info.Author, name)),
@@ -515,7 +515,7 @@ func (h *Handler) ServerLogin(ctx *context.Context) {
 			Path:     "/",
 		})
 	}
-	ctx.JSON(http.StatusOK, gin.H{
+	ctx.JSON(http.StatusOK, H{
 		"code": res.Code,
 		"data": res.Data,
 		"msg":  res.Msg,

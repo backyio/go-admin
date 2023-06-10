@@ -11,9 +11,7 @@ import (
 	"runtime/debug"
 
 	_ "github.com/backyio/go-admin/modules/db/drivers/mysql"
-	_ "github.com/backyio/go-admin/modules/db/drivers/oceanbase"
 	_ "github.com/backyio/go-admin/modules/db/drivers/postgres"
-	_ "github.com/backyio/go-admin/modules/db/drivers/sqlite"
 
 	cli "github.com/jawher/mow.cli"
 	"github.com/mgutz/ansi"

@@ -12,10 +12,6 @@ import (
 	_ "github.com/backyio/go-admin/modules/db/drivers/mysql"
 	// add postgresql driver
 	_ "github.com/backyio/go-admin/modules/db/drivers/postgres"
-	// add sqlite driver
-	_ "github.com/backyio/go-admin/modules/db/drivers/sqlite"
-	// add mssql driver
-	_ "github.com/backyio/go-admin/modules/db/drivers/mssql"
 	// add adminlte ui theme
 	_ "github.com/backyio/go-admin/themes/adminlte"
 
