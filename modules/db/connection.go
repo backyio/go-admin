@@ -16,14 +16,8 @@ import (
 const (
 	// DriverMysql is a const value of mysql driver.
 	DriverMysql = "mysql"
-	// DriverSqlite is a const value of sqlite driver.
-	DriverSqlite = "sqlite"
 	// DriverPostgresql is a const value of postgresql driver.
 	DriverPostgresql = "postgresql"
-	// DriverMssql is a const value of mssql driver.
-	DriverMssql = "mssql"
-	// DriverOceanBase is a const value of oceanbase driver.
-	DriverOceanBase = "oceanbase"
 )
 
 // Connection is a connection handler of database.
@@ -80,14 +74,8 @@ func GetConnectionByDriver(driver string) Connection {
 	switch driver {
 	case "mysql":
 		return GetMysqlDB()
-	case "mssql":
-		return GetMssqlDB()
-	case "sqlite":
-		return GetSqliteDB()
 	case "postgresql":
 		return GetPostgresqlDB()
-	case "oceanbase":
-		return GetOceanBaseDB()
 	default:
 		panic("driver not found!")
 	}
@@ -113,13 +101,6 @@ func GetAggregationExpression(driver, field, headField, delimiter string) string
 		return fmt.Sprintf("string_agg(%s::character varying, '%s') as %s", field, delimiter, headField)
 	case "mysql":
 		return fmt.Sprintf("group_concat(%s separator '%s') as %s", field, delimiter, headField)
-	case "sqlite":
-		return fmt.Sprintf("group_concat(%s, '%s') as %s", field, delimiter, headField)
-	case "mssql":
-		return fmt.Sprintf("string_agg(%s, '%s') as [%s]", field, delimiter, headField)
-	case "oceanbase":
-		return fmt.Sprintf("group_concat(%s separator '%s') as %s", field, delimiter, headField)
-
 	default:
 		panic("wrong driver")
 	}
