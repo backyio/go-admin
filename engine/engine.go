@@ -245,24 +245,9 @@ func (eng *Engine) MysqlConnection() db.Connection {
 	return db.GetConnectionFromService(eng.Services.Get(db.DriverMysql))
 }
 
-// MssqlConnection return the mssql db connection of given driver.
-func (eng *Engine) MssqlConnection() db.Connection {
-	return db.GetConnectionFromService(eng.Services.Get(db.DriverMssql))
-}
-
 // PostgresqlConnection return the postgresql db connection of given driver.
 func (eng *Engine) PostgresqlConnection() db.Connection {
 	return db.GetConnectionFromService(eng.Services.Get(db.DriverPostgresql))
-}
-
-// SqliteConnection return the sqlite db connection of given driver.
-func (eng *Engine) SqliteConnection() db.Connection {
-	return db.GetConnectionFromService(eng.Services.Get(db.DriverSqlite))
-}
-
-// OceanBaseConnection return the OceanBase db connection of given driver.
-func (eng *Engine) OceanBaseConnection() db.Connection {
-	return db.GetConnectionFromService(eng.Services.Get(db.DriverOceanBase))
 }
 
 type ConnectionSetter func(db.Connection)
@@ -276,18 +261,6 @@ func (eng *Engine) ResolveConnection(setter ConnectionSetter, driver string) *En
 // ResolveMysqlConnection resolve the mysql connection.
 func (eng *Engine) ResolveMysqlConnection(setter ConnectionSetter) *Engine {
 	eng.ResolveConnection(setter, db.DriverMysql)
-	return eng
-}
-
-// ResolveMssqlConnection resolve the mssql connection.
-func (eng *Engine) ResolveMssqlConnection(setter ConnectionSetter) *Engine {
-	eng.ResolveConnection(setter, db.DriverMssql)
-	return eng
-}
-
-// ResolveSqliteConnection resolve the sqlite connection.
-func (eng *Engine) ResolveSqliteConnection(setter ConnectionSetter) *Engine {
-	eng.ResolveConnection(setter, db.DriverSqlite)
 	return eng
 }
 
