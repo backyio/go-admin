@@ -12,7 +12,6 @@ import (
 	"path/filepath"
 	"runtime"
 	"strings"
-	"time"
 
 	"github.com/backyio/go-admin/modules/config"
 	"github.com/backyio/go-admin/modules/db"
@@ -185,28 +184,11 @@ func buildProjectWeb(port string) {
 				dbList config.DatabaseList
 			)
 
-			if info.DriverName != db.DriverSqlite {
-				dbList = map[string]config.Database{
-					"default": {
-						Host:            info.Host,
-						Port:            info.Port,
-						User:            info.User,
-						Pwd:             info.Password,
-						Name:            info.Database,
-						MaxIdleConns:    5,
-						MaxOpenConns:    10,
-						ConnMaxLifetime: time.Hour,
-						ConnMaxIdleTime: 0,
-						Driver:          info.DriverName,
-					},
-				}
-			} else {
-				dbList = map[string]config.Database{
-					"default": {
-						Driver: info.DriverName,
-						File:   info.File,
-					},
-				}
+			dbList = map[string]config.Database{
+				"default": {
+					Driver: info.DriverName,
+					File:   info.File,
+				},
 			}
 
 			cfg := config.SetDefault(&config.Config{

@@ -67,76 +67,57 @@ func askForDBConfig(info *dbInfo) config.DatabaseList {
 
 	if info.DriverName == "" {
 		info.DriverName = singleSelect(getWord("choose a driver"),
-			[]string{db.DriverMysql, db.DriverPostgresql, db.DriverSqlite, db.DriverMssql}, db.DriverMysql)
+			[]string{db.DriverMysql, db.DriverPostgresql}, db.DriverMysql)
 	}
 
-	if info.DriverName != db.DriverSqlite {
+	defaultPort := "3306"
+	defaultUser := "root"
 
-		defaultPort := "3306"
-		defaultUser := "root"
-
-		if info.DriverName == db.DriverPostgresql {
-			defaultPort = "5432"
-			defaultUser = "postgres"
-		}
-
-		if info.DriverName == db.DriverMssql {
-			defaultPort = "1433"
-			defaultUser = "sa"
-		}
-
-		if info.Host == "" {
-			info.Host = promptWithDefault("sql address", "127.0.0.1")
-		}
-
-		if info.Port == "" {
-			info.Port = promptWithDefault("sql port", defaultPort)
-		}
-
-		if info.User == "" {
-			info.User = promptWithDefault("sql username", defaultUser)
-		}
-
-		if info.Password == "" {
-			info.Password = promptPassword()
-		}
-
-		if info.Schema == "" && info.DriverName == db.DriverPostgresql {
-			info.Schema = promptWithDefault("sql schema", "public")
-		}
-
-		if info.Database == "" {
-			info.Database = prompt("sql database name")
-		}
-
-		return map[string]config.Database{
-			"default": {
-				Host:            info.Host,
-				Port:            info.Port,
-				User:            info.User,
-				Pwd:             info.Password,
-				Name:            info.Database,
-				MaxIdleConns:    5,
-				MaxOpenConns:    10,
-				ConnMaxLifetime: time.Hour,
-				ConnMaxIdleTime: 0,
-				Driver:          info.DriverName,
-				File:            "",
-			},
-		}
-	} else {
-
-		if info.File == "" {
-			info.File = promptWithDefault("sql file", "./admin.db")
-		}
-
-		return map[string]config.Database{
-			"default": {
-				Driver: info.DriverName,
-				File:   info.File,
-			},
-		}
+	if info.DriverName == db.DriverPostgresql {
+		defaultPort = "5432"
+		defaultUser = "postgres"
 	}
+
+	if info.Host == "" {
+		info.Host = promptWithDefault("sql address", "127.0.0.1")
+	}
+
+	if info.Port == "" {
+		info.Port = promptWithDefault("sql port", defaultPort)
+	}
+
+	if info.User == "" {
+		info.User = promptWithDefault("sql username", defaultUser)
+	}
+
+	if info.Password == "" {
+		info.Password = promptPassword()
+	}
+
+	if info.Schema == "" && info.DriverName == db.DriverPostgresql {
+		info.Schema = promptWithDefault("sql schema", "public")
+	}
+
+	if info.Database == "" {
+		info.Database = prompt("sql database name")
+	}
+
+	return map[string]config.Database{
+		"default": {
+			Host:            info.Host,
+			Port:            info.Port,
+			User:            info.User,
+			Pwd:             info.Password,
+			Name:            info.Database,
+			MaxIdleConns:    5,
+			MaxOpenConns:    10,
+			ConnMaxLifetime: time.Hour,
+			ConnMaxIdleTime: 0,
+			Driver:          info.DriverName,
+			File:            "",
+		},
+	}
+
 }
 
 func askForDBConnection(info *dbInfo) db.Connection {

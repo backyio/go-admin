@@ -7,7 +7,7 @@ var projectWebTmpl = `
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-        <meta name="author" content="GoAdmin">
+        <meta name="author" content="Backy.io">
         <meta name="description"
               content="GoAdmin is a golang framework which helps gopher to build a data visualization and admin panel in ten minutes">
         <meta name="keywords" content="go, git, framework, admin, GoAdmin">

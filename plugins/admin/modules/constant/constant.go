@@ -12,7 +12,7 @@ const (
 	PjaxUrlHeader = constant.PjaxUrlHeader
 
 	EditPKKey   = "__goadmin_edit_pk"
-	DetailPKKey = "__goadmin_detail_pk"
+	DetailPKKey = "__admin_detail_pk"
 	PrefixKey   = "__prefix"
 
 	IframeKey   = "__goadmin_iframe"

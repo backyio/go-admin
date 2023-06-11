@@ -845,7 +845,7 @@ func (s *SystemTable) GetOpTable(ctx *context.Context) (opTable Table) {
 	}).FieldDisplay(func(value types.FieldModel) interface{} {
 		return template.Default().
 			Link().
-			SetURL(config.Url("/info/manager/detail?__goadmin_detail_pk=") + strconv.Itoa(int(value.Row["user_id"].(int64)))).
+			SetURL(config.Url("/info/manager/detail?__admin_detail_pk=") + strconv.Itoa(int(value.Row["user_id"].(int64)))).
 			SetContent(template.HTML(value.Value)).
 			OpenInNewTab().
 			SetTabTitle("Manager Detail").

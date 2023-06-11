@@ -1706,7 +1706,7 @@ var TemplateList = map[string]string{"403": `<div class="missing-content">
                                        class="grid-row-delete"><i class="fa fa-trash" style="font-size: 16px;"></i></a>
                                 {{end}}
                                 {{if $DetailUrl}}
-                                    <a href='{{$DetailUrl}}&__goadmin_detail_pk={{(index $info $PrimaryKey).Content}}&{{(index $info "__admin_detail_params").Content}}'
+                                    <a href='{{$DetailUrl}}&__admin_detail_pk={{(index $info $PrimaryKey).Content}}&{{(index $info "__admin_detail_params").Content}}'
                                        class="grid-row-view">
                                         <i class="fa fa-eye" style="font-size: 16px;"></i>
                                     </a>
