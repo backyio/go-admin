@@ -6,7 +6,9 @@ require (
 	github.com/360EntSecGroup-Skylar/excelize v1.4.1
 	github.com/AlecAivazis/survey/v2 v2.3.6
 	github.com/NebulousLabs/fastrand v0.0.0-20181203155948-6fb6489aac4e
+	github.com/dchest/captcha v1.0.0
 	github.com/gavv/httpexpect v2.0.0+incompatible
+	github.com/go-echarts/go-echarts v1.0.0
 	github.com/go-sql-driver/mysql v1.6.0
 	github.com/gobuffalo/buffalo v1.1.0
 	github.com/gobuffalo/packr/v2 v2.8.3
@@ -78,6 +80,7 @@ require (
 	github.com/markbates/safe v1.0.1 // indirect
 	github.com/mattn/go-colorable v0.1.13 // indirect
 	github.com/mattn/go-isatty v0.0.16 // indirect
+	github.com/mattn/go-sqlite3 v2.0.3+incompatible // indirect
 	github.com/microcosm-cc/bluemonday v1.0.20 // indirect
 	github.com/mitchellh/go-homedir v1.1.0 // indirect
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect

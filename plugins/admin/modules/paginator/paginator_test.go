@@ -5,7 +5,7 @@ import (
 
 	"github.com/backyio/go-admin/modules/config"
 	"github.com/backyio/go-admin/plugins/admin/modules/parameter"
-	_ "github.com/backyio/go-admin/themes/sword"
+	_ "github.com/backyio/go-admin/themes/adminlte"
 )
 
 func TestGet(t *testing.T) {

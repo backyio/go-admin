@@ -4,13 +4,14 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	template2 "github.com/GoAdminGroup/go-admin/template"
-	"github.com/go-echarts/go-echarts/charts"
-	"github.com/go-echarts/go-echarts/datasets"
-	"github.com/go-echarts/go-echarts/templates"
 	"html/template"
 	"regexp"
 	"strings"
+
+	template2 "github.com/backyio/go-admin/template"
+	"github.com/go-echarts/go-echarts/charts"
+	"github.com/go-echarts/go-echarts/datasets"
+	"github.com/go-echarts/go-echarts/templates"
 )
 
 type Chart struct {

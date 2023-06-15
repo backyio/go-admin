@@ -1,11 +1,11 @@
 package theme2
 
 import (
-	"github.com/GoAdminGroup/components/login"
-	"github.com/GoAdminGroup/go-admin/template"
+	"github.com/backyio/go-admin/components/login"
+	"github.com/backyio/go-admin/template"
 )
 
-type Theme2 struct{
+type Theme2 struct {
 	*template.BaseComponent
 }
 

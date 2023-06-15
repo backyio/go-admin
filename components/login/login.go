@@ -8,14 +8,14 @@ import (
 	textTemplate "text/template"
 	"time"
 
-	"github.com/GoAdminGroup/components/login/theme1"
-	"github.com/GoAdminGroup/go-admin/modules/logger"
-	"github.com/GoAdminGroup/go-admin/modules/utils"
-	captcha2 "github.com/GoAdminGroup/go-admin/plugins/admin/modules/captcha"
-	template2 "github.com/GoAdminGroup/go-admin/template"
-	"github.com/GoAdminGroup/go-admin/template/login"
+	"github.com/backyio/go-admin/components/login/theme1"
+	"github.com/backyio/go-admin/modules/logger"
+	"github.com/backyio/go-admin/modules/utils"
+	captcha2 "github.com/backyio/go-admin/plugins/admin/modules/captcha"
+	template2 "github.com/backyio/go-admin/template"
+	"github.com/backyio/go-admin/template/login"
+	"github.com/backyio/go-admin/template/types"
 	"github.com/dchest/captcha"
-	"github.com/GoAdminGroup/go-admin/template/types"
 )
 
 var themes = map[string]Theme{
@@ -131,9 +131,9 @@ func (l *Login) GetAssetList() []string               { return themes[l.Theme].G
 func (l *Login) GetAsset(name string) ([]byte, error) { return themes[l.Theme].GetAsset(name[1:]) }
 func (l *Login) GetName() string                      { return "login" }
 func (l *Login) IsAPage() bool                        { return true }
-func (l *Login) GetJS() template.JS            				{ return "" }
-func (l *Login) GetCSS() template.CSS          				{ return "" }
-func (l *Login) GetCallbacks() types.Callbacks 				{ return make(types.Callbacks, 0) }
+func (l *Login) GetJS() template.JS                   { return "" }
+func (l *Login) GetCSS() template.CSS                 { return "" }
+func (l *Login) GetCallbacks() types.Callbacks        { return make(types.Callbacks, 0) }
 
 func (l *Login) GetContent() template.HTML {
 	buffer := new(bytes.Buffer)
