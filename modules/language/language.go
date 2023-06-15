@@ -13,11 +13,7 @@ import (
 )
 
 var (
-	EN   = language.English.String()
-	CN   = language.Chinese.String()
-	JP   = language.Japanese.String()
-	TC   = language.TraditionalChinese.String()
-	PTBR = language.BrazilianPortuguese.String()
+	EN = language.English.String()
 )
 
 func FixedLanguageKey(key string) string {
@@ -27,7 +23,7 @@ func FixedLanguageKey(key string) string {
 	return key
 }
 
-var Langs = [...]string{EN, CN, JP, TC}
+var Langs = [...]string{EN}
 
 // Get return the value of default scope.
 func Get(value string) string {
