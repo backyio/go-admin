@@ -115,7 +115,7 @@ var TemplateList = map[string]string{"403": `<div class="missing-content">
                         </li>
                         <li class="user-footer">
                             <div class="pull-left">
-                                <a href="{{.UrlPrefix}}/info/normal_manager/edit?__goadmin_edit_pk={{.User.Id}}"
+                                <a href="{{.UrlPrefix}}/info/normal_manager/edit?__admin_edit_pk={{.User.Id}}"
                                    class="btn btn-default btn-flat">{{lang "setting"}}</a>
                             </div>
                             <div class="pull-right">
@@ -1702,7 +1702,7 @@ var TemplateList = map[string]string{"403": `<div class="missing-content">
                         <td style="text-align: center;">
                             {{if not $ActionFold}}
                                 {{if $EditUrl}}
-                                    <a href='{{$EditUrl}}&__goadmin_edit_pk={{(index $info $PrimaryKey).Content}}&{{(index $info "__admin_edit_params").Content}}'><i
+                                    <a href='{{$EditUrl}}&__admin_edit_pk={{(index $info $PrimaryKey).Content}}&{{(index $info "__admin_edit_params").Content}}'><i
                                                 class="fa fa-edit" style="font-size: 16px;"></i></a>
                                 {{end}}
                                 {{if $DeleteUrl}}

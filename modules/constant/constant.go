@@ -12,6 +12,6 @@ const (
 
 	ContextNodeNeedAuth = "need_auth"
 
-	IframeKey   = "__goadmin_iframe"
-	IframeIDKey = "__goadmin_iframe_id"
+	IframeKey   = "__admin_iframe"
+	IframeIDKey = "__admin_iframe_id"
 )

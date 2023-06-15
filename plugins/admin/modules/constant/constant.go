@@ -11,12 +11,18 @@ const (
 	// PjaxUrlHeader is default pjax url http header key.
 	PjaxUrlHeader = constant.PjaxUrlHeader
 
-	EditPKKey   = "__goadmin_edit_pk"
-	DetailPKKey = "__admin_detail_pk"
-	PrefixKey   = "__prefix"
+	EditPKKey  = "__admin_edit_pk"
+	EditPKKey1 = "__admin_edit_pk1"
+	EditPKKey2 = "__admin_edit_pk2"
 
-	IframeKey   = "__goadmin_iframe"
-	IframeIDKey = "__goadmin_iframe_id"
+	DetailPKKey  = "__admin_detail_pk"
+	DetailPKKey1 = "__admin_detail_pk1"
+	DetailPKKey2 = "__admin_detail_pk2"
+
+	PrefixKey = "__prefix"
+
+	IframeKey   = "__admin_iframe"
+	IframeIDKey = "__admin_iframe_id"
 
 	ContextNodeNeedAuth = constant.ContextNodeNeedAuth
 )
