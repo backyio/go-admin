@@ -406,8 +406,10 @@ type Config struct {
 
 	URLFormat URLFormat `json:"url_format,omitempty" yaml:"url_format,omitempty" ini:"url_format,omitempty"`
 
-	prefix string       `json:"-" yaml:"-" ini:"-"`
-	lock   sync.RWMutex `json:"-" yaml:"-" ini:"-"`
+	LogToSysLog  bool         `json:"log_to_sys_log" yaml:"log_to_sys_log" ini:"url_format,log_to_sys_log"`
+	SysLogPrefix string       `json:"sys_log_prefix" yaml:"log_to_sys_log" ini:"url_format,log_to_sys_log"`
+	prefix       string       `json:"-" yaml:"-" ini:"-"`
+	lock         sync.RWMutex `json:"-" yaml:"-" ini:"-"`
 }
 
 type Logger struct {

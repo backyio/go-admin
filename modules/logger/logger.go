@@ -114,6 +114,7 @@ func (l *Logger) Init() {
 	), zap.AddCaller(), zap.AddCallerSkip(1), zap.AddStacktrace(errorLevelEnabler))
 	l.sugaredLogger = zapLogger.Sugar()
 	l.logger = zapLogger
+
 }
 
 func (l *Logger) getEncoder(levelKey string) zapcore.Encoder {
@@ -201,8 +202,10 @@ type Config struct {
 
 	AccessAssetsLogOff bool
 
-	Rotate RotateCfg
-	Encode EncoderCfg
+	Rotate       RotateCfg
+	Encode       EncoderCfg
+	LogToSysLog  bool
+	SysLogPrefix string
 
 	Level int8
 
