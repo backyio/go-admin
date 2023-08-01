@@ -771,7 +771,7 @@ func (tb *DefaultTable) UpdateData(dataList form.Values) error {
 func (tb *DefaultTable) InsertData(dataList form.Values) error {
 
 	dataList.Add(form.PostTypeKey, "1")
-
+	tb.PrimaryKey.Type
 	var (
 		id     = int64(0)
 		err    error

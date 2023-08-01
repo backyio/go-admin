@@ -21,7 +21,6 @@ import (
 func SetPageContent(ctx *context.Context, user models.UserModel, c func(ctx interface{}) (types.Panel, error), conn db.Connection) {
 
 	panel, err := c(ctx)
-
 	if err != nil {
 		logger.Error("SetPageContent", err)
 		panel = template.WarningPanel(err.Error())
