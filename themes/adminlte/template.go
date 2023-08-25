@@ -1757,7 +1757,7 @@ var TemplateList = map[string]string{"403": `<div class="missing-content">
             };
 
             const pjaxContainer = "#pjax-container";
-            const noAnimation = "__go_admin_no_animation_";
+            const noAnimation = "__admin_no_animation_";
 
             function iCheck(el) {
                 el.iCheck({checkboxClass: 'icheckbox_minimal-blue'}).on('ifChanged', function () {

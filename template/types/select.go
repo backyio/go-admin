@@ -45,7 +45,7 @@ func GetDefaultSelection(placeholder string, options FieldOptions, action Action
 
 func (b *DefaultSelection) Content() (template.HTML, template.JS) {
 
-	optionsHtml := `<option value='__go_admin_all__'>` + language.Get("All") + `</option>`
+	optionsHtml := `<option value='__admin_all__'>` + language.Get("All") + `</option>`
 
 	for _, op := range b.Options {
 		optionsHtml += `<option value='` + op.Value + `'>` + op.Text + `</option>`

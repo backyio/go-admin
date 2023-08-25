@@ -1373,7 +1373,7 @@ func (f *FormPanel) EnableAjaxData(data AjaxData) *FormPanel {
 		} else {
 			jumpURL = `
 		if (data.data && data.data.token !== "") {
-			$("input[name='__go_admin_t_']").val(data.data.token)
+			$("input[name='__admin_t_']").val(data.data.token)
 		}`
 		}
 		f.AjaxSuccessJS = template.JS(`
@@ -1395,7 +1395,7 @@ func (f *FormPanel) EnableAjaxData(data AjaxData) *FormPanel {
         });
 	} else {
 		if (data.data && data.data.token !== "") {
-			$("input[name='__go_admin_t_']").val(data.data.token);
+			$("input[name='__admin_t_']").val(data.data.token);
 		}
 		swal({
 			type: "error",
@@ -1415,7 +1415,7 @@ func (f *FormPanel) EnableAjaxData(data AjaxData) *FormPanel {
 		f.AjaxErrorJS = template.JS(`
 	if (data.responseText !== "") {
 		if (data.responseJSON.data && data.responseJSON.data.token !== "") {
-			$("input[name='__go_admin_t_']").val(data.responseJSON.data.token)
+			$("input[name='__admin_t_']").val(data.responseJSON.data.token)
 		}
 		swal({
 			type: "error",
