@@ -79,7 +79,7 @@ func (admin *Admin) initRouter() *Admin {
 
 	authRoute.GET("/application/info", admin.handler.SystemInfo)
 
-	route.ANY("/operation/:__goadmin_op_id", auth.Middleware(admin.Conn), admin.handler.Operation)
+	route.ANY("/operation/:__admin_op_id", auth.Middleware(admin.Conn), admin.handler.Operation)
 
 	if config.GetOpenAdminApi() {
 
